@@ -1,11 +1,11 @@
-# saxweb
+# osmTestMap
 Test web pages for interaction between OpenStreetMap and Leaflet
 
-saxweb
+osmTestMap
 =============
 
-Created by José Manuel Mira at [Saxweb] (https://josemamira.github.io/saxweb/)
-Full demo at [Saxweb] (https://josemamira.github.io/saxweb/)
+Created by José Manuel Mira at [osmTestMap] (https://josemamira.github.io/osmTestMap/)
+Full demo at [Saxweb] (https://josemamira.github.io/osmTestMap/)
 
 
 
@@ -23,5 +23,5 @@ Examples
 More info
 =============
 
-Blog (spanish) in [Saxweb] (https://josemamira.github.io/saxweb/)
+Blog (spanish) in [Saxweb] (https://josemamira.github.io/osmTestMap/)
 
