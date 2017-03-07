@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet and Flickr with Leaflet.Photo plugin</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:image" content="route.png" />
+	<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+	<link rel="stylesheet" href="lib/cluster/MarkerCluster.css" />	
+	<link rel="stylesheet" href="Leaflet.Photo.css" />	
+	<link rel="stylesheet" href="css/map.css" />
+</head>
+<body>
+	<div id="map"></div>
+	<script src="lib/leaflet/leaflet.js"></script>	
+	<script src="lib/cluster/leaflet.markercluster.js"></script>	
+	<script src="Leaflet.Photo.js"></script>	
+	<script>
+
+	var map = L.map('map', {
+		maxZoom: 19
+	});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: 'OpenStreetMap' }).addTo(map);
+
+	var photoLayer = L.photo.cluster().on('click', function (evt) {
+		var photo = evt.layer.photo,
+			template = '<img src="{url}"/></a><p>{caption}</p>';
+
+		evt.layer.bindPopup(L.Util.template(template, photo), {
+			className: 'leaflet-popup-photo',
+			minWidth: 400
+		}).openPopup();
+	});
+
+
+	/* Flickr */
+	var flickrAPI = "";
+	flickrAPI += "https://api.flickr.com/services/rest/?";
+	flickrAPI += "&method=flickr.photos.search";
+	flickrAPI += "&api_key=11d9a83951636a94885f5145f1a33727";
+	/* Comment or Uncomment for user_id to show only specific user geo-photos*/ 
+	flickrAPI += "&user_id=147583265%40N03";
+	flickrAPI += "&tags=mapping_elda";	
+	flickrAPI += "&has_geo=1";
+	flickrAPI += "&extras=geo,url_t,owner_name,date_upload,license";
+	//flickrAPI += "&per_page=5";  // Nº máximo de fotos para visualizar
+	flickrAPI += "&page=1";
+	flickrAPI += "&format=json";
+	// UPDATE: Request plain old JSON
+	flickrAPI += "&nojsoncallback=1";
+	
+	// Get JSON request
+    var xhr= new XMLHttpRequest();
+    xhr.open("GET",flickrAPI,true);   // 
+    xhr.send();
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 && xhr.status==200) {
+            var data = JSON.parse(xhr.responseText);
+            console.log(data.photos);
+            //alert('total geophotos: '+ data.photos.photo.length);
+            var photos = [];
+            for (var i = 0; i < data.photos.photo.length; i++) {
+				var p = data.photos.photo[i];		
+				// Date
+				var pdate = new Date(p.dateupload*1000);
+				//var months = ['January','February','March','April','May','June','July','August','Septepmber','October','November','December'];
+		    		var months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+				pdate = pdate.getDate()+'&nbsp;'+months[pdate.getMonth()]+'&nbsp;'+pdate.getFullYear();
+				// Push				
+				photos.push({
+						lat: p.latitude,
+						lng: p.longitude,						
+						url: 'https://www.flickr.com/photos/'+p.id+'_'+p.secret+'.jpg',
+						caption: '<a id="'+p.id+'" title="'+p.title+'" href="https://www.flickr.com/photos/'+p.owner+'/'+p.id+'/" target="_new">'+p.title+'</a><br/>'+
+								'<a href="https://www.flickr.com/">Flickr</a> &copy;&nbsp;<a href="http://www.flickr.com/photos/'+p.owner+'/" target="_new">'+p.ownername+'</a>, '+
+								pdate,
+						thumbnail:p.url_t
+				});	
+			} 
+			photoLayer.add(photos).addTo(map);
+			map.fitBounds(photoLayer.getBounds()); 
+        } 
+    };
+
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet OverPass Layer demo page (cuartelillos)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="../../../javascripts/overpass//OverPassLayer.css" />
+    
+
+    <script src="../../../javascripts/leaflet/leaflet.js"></script>
+    <script src="../../../javascripts/overpass/OverPassLayer.bundle.js"></script>
+
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        .leaflet-control-minZoomIndicator {
+		    font-size: 2em;
+
+		    border-radius: 10px;
+		    padding: 1px 15px;
+		    opacity: 0.5;   
+	} 
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
+            attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
+        var osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: [attr_osm, attr_overpass].join(', ')
+        });
+
+        var map = new L.Map('map').addLayer(osm).setView(new L.LatLng(38.4773559, -0.7947678), 15);
+        
+    var mycIcon = L.icon({
+		iconUrl: 'recycle2.svg',
+		iconSize:     [35, 35], // size of the icon
+		iconAnchor:   [22, 25], // point of the icon which will correspond to marker's location
+		popupAnchor:  [-3, -28] // point from which the popup should open relative to the iconAnchor
+		});
+    
+    var mycIcon2 = L.icon({
+		iconUrl: 'papelera.svg',
+		iconSize:     [35, 35], // size of the icon
+		iconAnchor:   [22, 25], // point of the icon which will correspond to marker's location
+		popupAnchor:  [-3, -28] // point from which the popup should open relative to the iconAnchor
+		});        
+        
+
+		// Servidores. Ver http://wiki.openstreetmap.org/wiki/Overpass_API
+		// HTTPS: https://overpass-api.de/api
+		// HTTP:  http://overpass.osm.rambler.ru/cgi/
+		
+		// Contenedores
+        var opl = new L.OverPassLayer({
+            debug: true,
+            endPoint: 'https://overpass-api.de/api/',
+            query: 'node({{bbox}})["amenity"="recycling"];out;', 
+            markerIcon:  mycIcon,    
+            minZoomIndicatorOptions: {
+                position: 'topright',
+                minZoomMessage: 'Current zoom level: CURRENTZOOM - All data at level: MINZOOMLEVEL'
+            }
+        });
+        
+        // Papeleras
+        var op2 = new L.OverPassLayer({
+            debug: true,
+            endPoint: 'https://overpass-api.de/api/',
+            query: 'node({{bbox}})["amenity"="waste_basket"];out;', 
+            markerIcon:  mycIcon2,    
+            minZoomIndicatorOptions: {
+                position: 'topright',
+                minZoomMessage: 'Current zoom level: CURRENTZOOM - All data at level: MINZOOMLEVEL'
+            }
+        });
+
+
+        map.addLayer(opl);
+        map.addLayer(op2);
+        
+    </script>
+</body>
+
+</html>
+

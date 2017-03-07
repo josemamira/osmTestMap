@@ -1,0 +1,175 @@
+<html>
+<head>
+  <title>A Leaflet map!</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+  <style>
+    #map{ height: 100% }
+  </style>
+</head>
+<body>
+ 
+  <div id="map"></div>
+ 
+  <script>
+	misElementos =     {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Ayuntamiento",
+        "foto": "6000.jpg",
+        "icon": "ayuntamiento.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.791015625,
+          38.482754145385314
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Colegio Alberto Sols",
+        "foto": "6544.jpg",
+        "icon": "cole.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.7970237731933593,
+          38.48409789038673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Colegio Cervantes",
+        "foto": "6664.jpg",
+        "icon": "cole.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.7886123657226561,
+          38.47563187862808
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Colegio Hermanas Carmelitas",
+        "foto": "6776.jpg",
+        "icon": "cole.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.7970237731933593,
+          38.472809653752286
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Plaza de España",
+        "foto": "6822.jpg",
+        "icon": "parque.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.7965087890625,
+          38.47818522498729
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Parque de los Príncipes",
+        "foto": "6834.jpg",
+        "icon": "parque.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.7925605773925781,
+          38.46971851879819
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Parque del río",
+        "foto": "6834.jpg",
+        "icon": "parque.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.785694122314453,
+          38.48396351701397
+        ]
+      }
+    }
+  ]
+}; 
+  // initialize the map
+  var map = L.map('map').setView([38.476523, -0.795769], 14);
+ 
+  // load a tile layer
+  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+
+    L.geoJson(misElementos,{
+      pointToLayer: function(feature,latlng){
+		var ratIcon = L.icon({
+		  iconUrl: "icons/"+feature.properties.icon,
+		  iconSize: [60,50]
+		});		  
+        var marker = L.marker(latlng,{icon: ratIcon});
+        
+ 		if (feature.properties && feature.properties.nombre && feature.properties.foto) {
+			contenido = "<strong>"+feature.properties.nombre+"</strong><br>"+
+				"<img src='fotos/"+feature.properties.foto+"' width='300'>";
+			marker.bindPopup(contenido);
+		}       
+        
+        
+       // marker.bindPopup(feature.properties.nombre + '<br/>' + feature.properties.texto);
+        return marker;
+      }
+    }).addTo(map);
+
+ 
+  </script>
+</body>
+</html>

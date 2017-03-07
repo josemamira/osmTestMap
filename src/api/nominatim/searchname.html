@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Test llamada API Nominatum con AJAX</title>
+<script src="../../../javascripts/jquery/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+<!-- cuerpo html -->
+<label>Busca un topónimo</label>
+<input id="location" type="text" placeholder="Escribe un toponimo. Ej Polop">
+<input id = "btnSubmit" type="submit" value="Buscar"/>
+
+<div id="info">Información de la búsqueda</div>
+<ul id="listado"></ul>
+
+<script>	
+// Evento click al boton btnSubmit
+$("#btnSubmit").click(function(){
+	// obtener valor de la caja de texto
+	// a) modo jquery
+	//var locationVal = $('#location').val();
+	// b) modo html5
+	$('ul').empty();
+		
+	var locationVal = document.getElementById('location').value;
+	if (!locationVal) {
+		alert("NO has escrito nada");
+	} else {
+		var geocode = ' https://nominatim.openstreetmap.org/search?format=json&q=' + locationVal; //alert(geocode);
+     	// llamada jquery para obtener json
+		$.getJSON(geocode, function(data) {
+			/* obtener datos del json (sólo del 1er elemento del array). Voy a obtener licencia y latlong. Puedes incluir cualquiera de estos:  
+			place_id,licence,osm_type,osm_id,boundingbox,lat,lon,display_name,class,icon	*/  		  	
+			var licence = data[0].licence;		  
+			var latlng = [data[0].lat, data[0].lon];
+			var mensaje = 'licencia: '+ licence + '<br>lat y long: '+ latlng + '<br>caja: ' + data[0].boundingbox
+			console.log( "Este es el JSON resultante: " + JSON.stringify(data) );
+			document.getElementById("info").innerHTML = mensaje;
+			alert("la consulta ha devuelto :" + data.length + " resultados");
+			// Recorrer el array data para obtener el nombre y mostrarlo en el id listado
+			$.each(data, function( i, value ) { 
+				$( "#listado" ).append( "<li><a href='https://www.openstreetmap.org/relation/"+data[i].osm_id+"'>"+data[i].display_name+"</a></li>" ); 
+			});
+		});     
+	}  
+}); 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet con GeoJSON</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="../../javascripts/leaflet/leaflet.css" />
+</head>
+<body>
+	<div id="map" style="width: 600px; height: 400px"></div>
+
+	<script src="../../javascripts/leaflet/leaflet.js"></script>
+	<script src="limite.geojson" type="text/javascript"></script>
+	<script>
+
+		var map = L.map('map').setView([38.48216,-0.82378], 12);
+
+			var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+			L.tileLayer(osmUrl, {	
+				attribution: '<a href="http://www.elda.es">Elda</a> | &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+			}).addTo(map);		
+
+
+		L.marker([38.476523, -0.795769]).addTo(map)
+			.bindPopup("<b>Hola amigos!</b><br />Estoy en ELDA.").openPopup();
+
+		L.circle([38.48216,-0.82378], 1000, {
+			color: 'red',
+			fillColor: '#f03',
+			fillOpacity: 0.5
+		}).addTo(map).bindPopup("Soy un círculo.");
+
+
+		var popup = L.popup();
+		
+		
+		L.geoJson([termino], {
+			style: function (feature) {
+				return feature.properties && feature.properties.style;
+			},
+		}).addTo(map);		
+		
+
+	</script>
+</body>
+</html>

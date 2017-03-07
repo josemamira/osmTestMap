@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>Servicio TMS externos</title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="../../javascripts/leaflet/leaflet.css" />
+</head>
+<body>
+    <!--<div id="map" style="width: 700px; height: 500px"></div> -->
+    <div id="map" style="width: 100%; height: 100%; padding: 0; margin: 0; background: #fff;"></div>
+    <script src="../../javascripts/leaflet/leaflet.js"></script>
+
+    <script>
+        
+    // marker
+    var myIcon = L.icon({
+		iconUrl: '../../javascripts/leaflet/images/marker-icon.png',
+		iconSize:     [25, 41], // size of the icon
+		iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+	});
+    var marker = L.marker([38.4773559, -0.7947678], {icon: myIcon});
+    var pnoa = L.tileLayer.wms('http://www.ign.es/wms-inspire/pnoa-ma', {
+	layers: 'OI.OrthoimageCoverage',
+	format: 'image/png',
+	transparent: false,
+	continuousWorld : true,
+	attribution: 'PNOA cedido por © <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
+});    
+	
+        //var pnoa = L.tileLayer.wms('https://www.ign.es/wms-inspire/pnoa-ma?', { layers: 'ne:OI.OrthoimageCoverage'} );
+	    
+	// osm layer
+	var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
+		attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
+	var osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, attribution: [attr_osm, attr_overpass].join(', ')});
+	// mapbox layer
+	var MapBox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		attribution: 'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		subdomains: 'abcd',
+		id: 'mapbox.streets',
+		accessToken: 'pk.eyJ1IjoiajNtIiwiYSI6ImNpb3R4aHM4ejAwM2l2a20ydjJyOWRzMnAifQ.S-GevbL5eeWathwz_UdHHg'
+	});
+	// osm b/n
+	var osm_bn = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+		maxZoom: 18,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	});
+
+	var map = L.map('map', {
+		center: [38.5365419,-0.8202874],
+		zoom: 8,
+		layers: [pnoa, osm, MapBox, osm_bn ]
+	});
+
+	// control de capas
+	var baseMaps = {
+		"Foto (WMS PNOA)": pnoa,
+		"Calles (OSM)": osm,
+		"Mapbox": MapBox,
+		"Grises (OSM)": osm_bn		
+	};
+
+	var overlayMaps = {
+		"Elda": marker
+	};       
+		
+	L.control.layers(baseMaps, overlayMaps).addTo(map);        
+			
+ 
+    </script>
+</body>
+</html>

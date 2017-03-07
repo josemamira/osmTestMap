@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="234.84373" height="245.56269" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <title>Coffee cup icon</title>
+ <metadata id="metadata60">image/svg+xmlCoffee cup icon2011-01-08Denilson Figueiredo de ScoffeedrinkteacupGerald_G and pitrCoffee cup based on http://www.openclipart.org/detail/50557
+Coffee smoke based on http://www.openclipart.org/detail/22305</metadata>
+ <defs>
+  <linearGradient gradientUnits="userSpaceOnUse" xlink:href="#XMLID_1_" id="linearGradient3005" y2="227.73579" x2="455.14841" y1="227.73579" x1="424.36719"/>
+  <linearGradient gradientUnits="userSpaceOnUse" xlink:href="#XMLID_2_" id="linearGradient3007" y2="227.37601" x2="0.0713" y1="227.37601" x1="30.851601"/>
+  <linearGradient gradientUnits="userSpaceOnUse" xlink:href="#XMLID_3_" id="linearGradient3009" y2="0.0718" x2="227.73579" y1="30.8521" x1="227.73579"/>
+  <linearGradient gradientUnits="userSpaceOnUse" xlink:href="#XMLID_4_" id="linearGradient3011" y2="454.67969" x2="227.37601" y1="423.89941" x1="227.37601"/>
+  <linearGradient x1="424.36719" y1="227.73579" x2="455.14841" y2="227.73579" id="XMLID_1_" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#e5e5e5" id="stop16" offset="0"/>
+   <stop stop-color="#e2e2e2" id="stop18" offset="0.1696"/>
+   <stop stop-color="#d8d8d8" id="stop20" offset="0.3059"/>
+   <stop stop-color="#c7c7c7" id="stop22" offset="0.4306"/>
+   <stop stop-color="#b0b0b0" id="stop24" offset="0.5484"/>
+   <stop stop-color="#919191" id="stop26" offset="0.6614"/>
+   <stop stop-color="#6b6b6b" id="stop28" offset="0.7707"/>
+   <stop stop-color="#3e3e3e" id="stop30" offset="0.8772"/>
+   <stop stop-color="#0c0c0c" id="stop32" offset="0.9788"/>
+   <stop stop-color="#000000" id="stop34" offset="1"/>
+  </linearGradient>
+  <linearGradient x1="30.851601" y1="227.37601" x2="0.0713" y2="227.37601" id="XMLID_2_" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#e5e5e5" id="stop39" offset="0"/>
+   <stop stop-color="#e2e2e2" id="stop41" offset="0.2675"/>
+   <stop stop-color="#d8d8d8" id="stop43" offset="0.4824"/>
+   <stop stop-color="#c7c7c7" id="stop45" offset="0.679"/>
+   <stop stop-color="#b0b0b0" id="stop47" offset="0.8635"/>
+   <stop stop-color="#999999" id="stop49" offset="1"/>
+  </linearGradient>
+  <linearGradient x1="227.73579" y1="30.8521" x2="227.73579" y2="0.0718" id="XMLID_3_" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#e5e5e5" id="stop54" offset="0"/>
+   <stop stop-color="#e2e2e2" id="stop56" offset="0.2675"/>
+   <stop stop-color="#d8d8d8" id="stop58" offset="0.4824"/>
+   <stop stop-color="#c7c7c7" id="stop60" offset="0.679"/>
+   <stop stop-color="#b0b0b0" id="stop62" offset="0.8635"/>
+   <stop stop-color="#999999" id="stop64" offset="1"/>
+  </linearGradient>
+  <linearGradient x1="227.37601" y1="423.89941" x2="227.37601" y2="454.67969" id="XMLID_4_" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#e5e5e5" id="stop69" offset="0"/>
+   <stop stop-color="#e2e2e2" id="stop71" offset="0.1696"/>
+   <stop stop-color="#d8d8d8" id="stop73" offset="0.3059"/>
+   <stop stop-color="#c7c7c7" id="stop75" offset="0.4306"/>
+   <stop stop-color="#b0b0b0" id="stop77" offset="0.5484"/>
+   <stop stop-color="#919191" id="stop79" offset="0.6614"/>
+   <stop stop-color="#6b6b6b" id="stop81" offset="0.7707"/>
+   <stop stop-color="#3e3e3e" id="stop83" offset="0.8772"/>
+   <stop stop-color="#0c0c0c" id="stop85" offset="0.9788"/>
+   <stop stop-color="#000000" id="stop87" offset="1"/>
+  </linearGradient>
+  <linearGradient gradientTransform="translate(4,-8)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient6943" id="linearGradient7071" y2="182.62085" x2="351.88812" y1="202.41983" x1="476.26639"/>
+  <linearGradient id="linearGradient6943">
+   <stop stop-color="#f5f5f5" id="stop6945" offset="0"/>
+   <stop stop-color="#ffffff" stop-opacity="0" id="stop6947" offset="1"/>
+  </linearGradient>
+  <linearGradient gradientTransform="matrix(0.9911757,-0.1325552,0.1325552,0.9911757,-10.355598,55.031921)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient6943" id="linearGradient7073" y2="98.475136" x2="358.87143" y1="98.475136" x1="247.3362"/>
+  <linearGradient id="linearGradient4298">
+   <stop stop-color="#f5f5f5" id="stop4300" offset="0"/>
+   <stop stop-color="#ffffff" stop-opacity="0" id="stop4302" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g id="g4449">
+   <path fill="#000000" fill-rule="evenodd" d="m39.390621,86.531448c1.31813,29.368286 9.64949,106.417038 28.874996,125.09375l49.156242,0l49.15625,0c19.225494,-18.676712 27.55687,-95.725464 28.875,-125.09375l-78.03125,0l-78.031239,0z" id="path121"/>
+   <path fill="#000000" fill-rule="evenodd" d="m-0.00001,219.562698c5.97124,13.714874 26.253729,23.537628 38.187498,26l79.234379,0l79.203117,0c11.933762,-2.462372 32.247528,-12.285126 38.21875,-26l-117.421867,0l-117.421877,0z" id="path123"/>
+   <path fill="#000000" stroke-width="21.686321" d="m187.058029,86.531448c-26.509537,0 -48.215866,21.706345 -48.215866,48.215881c0,26.509537 21.706329,48.215866 48.215866,48.215866c26.509537,0 48.215881,-21.706329 48.215881,-48.215866c0,-26.509537 -21.706345,-48.215881 -48.215881,-48.215881zm0,20.001083c15.700745,0 28.214798,12.514053 28.214798,28.214798c0,15.700745 -12.514053,28.214783 -28.214798,28.214783c-15.700745,0 -28.214783,-12.514038 -28.214783,-28.214783c0,-15.700745 12.514038,-28.214798 28.214783,-28.214798z" id="path3102"/>
+   <g id="g4444" transform="matrix(1.97548 0 0 1.97548 -641.329 -2.82126)">
+    <path fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-miterlimit="4" id="path7593" d="m368.383789,3.428143c15.256683,15.91749 -14.093689,16.960079 0,33.240311"/>
+    <path fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-miterlimit="4" d="m385.404327,3.428143c15.256683,15.91749 -14.093689,16.960079 0,33.240311" id="path7595"/>
+    <path fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-miterlimit="4" id="path7597" d="m402.424866,3.428143c15.256683,15.91749 -14.093689,16.960079 0,33.240311"/>
+   </g>
+  </g>
+ </g>
+</svg>

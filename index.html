@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--<link rel="stylesheet" type="text/css" href="css/font-awesome-4.7.0/css/font-awesome.min.css" media="print">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>osmTestMap by josemamira</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>osmTestMap</h1>
+        <h2></h2>
+        <a href="https://github.com/josemamira/osmTestMap" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+  <span aria-hidden="true" class="octicon octicon-link"></span></a>Bienvenido a osmTestMap.</h3>
+
+<p>Este proyecto tiene como objetivo mostrar las posibilidades que ofrece OpenStreetMap en portales web, para que sirvan de inspiración a organizaciones y particulares que quieran llegar más lejos con un mapa. Todos los desarrollos web se han realizado utilizando librerías de código abierto como <a href="http://leafletjs.com/" target="_blank">Leaflet</a>, <a href="https://jquery.com/" target="_blank">Jquery</a>, 
+<a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a>, 
+<a href="https://wiki.openstreetmap.org/wiki/Overpass_API" target="_blank">Overpass</a>, <a href="https://github.com/Turbo87/sidebar-v2" target="_blank">Sidebar plugin</a> para Leaflet y <a href="http://project-osrm.org/" target="_blank">OSRM</a></p>
+<p><a href="doc/saxmap.pdf">Documento</a> con la presentación del evento celebrado el 14 de octubre de 2016</p>
+
+<iframe src="https://www.slideshare.net/slideshow/embed_code/key/LhY2b98Edgedmw" width="595" height="485" frameborder="0" 
+        marginwidth="0" marginheight="0" scrolling="no" 
+        style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> 
+</iframe> 
+<div style="margin-bottom:5px">
+    <strong> 
+      <a href="//www.slideshare.net/j3m/saxmap" title="Saxmap" target="_blank">osmTestMap</a> </strong> de <strong>
+  <a target="_blank" href="//www.slideshare.net/j3m">j3m</a></strong> 
+  </div>          
+          
+          
+          
+          
+<h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true">
+  <span aria-hidden="true" class="octicon octicon-link"></span></a>Diseños básico</h3>
+
+<p>Estos primeros diseños tienen como objetivo crear sencillas páginas web con un contenedor de mapa. Los elementos que son necesario personalizar son la coordenada geográfica de ubicación del centro del mapa y el nivel de zoom deseado.</p>
+<ul>
+  <li><b>Mapa en ventana</b>: Es el ejemplo más b&aacute;sico, con apenas 5 l&iacute;neas de código<br/> 
+    <a href="src/basico/osm0.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/basico/osm0.html" target="_blank">
+    <button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+  <li><b>Mapa con vectores (geoJSON)</b>: S&iacute; quieres marcar alguna zona, o resaltarla te recomendamos utilizar el est&aacute;dar GeoJSON. En <a href="http://geojson.io/" target="_blank">geojson.io</a> puedes crearlo con facilidad y sin conocimientos de su sintaxis</a><br/>
+    <a href="src/basico/osm1.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/basico/osm1.html" target="_blank">
+<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+  <li>Blog personal con enlaces y mapa en iframe: Sí tienes un blog que no te permite escribir c&oacute;digo HTML o Javascript, o bien no quieres complicarte la vida y 
+  sólo quieres incluir el mapa de tu zona puedes utilizar el tag <strong>IFRAME</strong> que permite incluir una página dentro de otra. 
+  En la web de <a href="http://osm.org" target="_blank">OpenStreetMap</a> tienes un asistente en el apartado bot&oacute;n de "<i>Compartir</i>"<br/>
+    <a href="src/basico/miblog.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/basico/miblog.html" target="_blank">
+<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+  <li><b>Mapa a pantalla completa</b>:  Sí quieres que tus usuarios vean bien un mapa, no lo dudes, y ponlo a pantalla completa<br/>
+    <a href="src/basico/osm2.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/basico/osm2.html" target="_blank">
+<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+  <li><img src="images/new.png" width="58" height="24" alt=""> <b>Uso de iconos personalizados e información en 'popup' a partir de atributos
+     de un GeoJSON</b>:  Algunos usuarios colaboradoras de OpenStreetMap se decepcionan porque no les aparece determinado elemento que han incluido. La raz&oacute;n es que el motor de renderizado utilizado, 
+     Mapnik en el caso del visor por defecto de OpenStreetMap no incluye simbología para todos los elementos. Una interesante manera de resaltar un elemento es utilizando nuestros propios iconos, e 
+     incluso podemos darle un toque de originalidad con popups personalizados. Es el caso que ofrecemos, como a partir de un GeoJSON con atributos podemos interaccionar de manera muy elegante<br/>
+     <img src="images/captura_geojson.png" width="405" height="459" alt="GeoJSON con atributos enlazado a fotografías"><br>
+    <a href="src/basico/osm3.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/basico/osm3.html" target="_blank">
+<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+</ul>
+
+
+          
+<h3>
+   <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true">
+   <span aria-hidden="true" class="octicon octicon-link"></span></a>Llamadas a APIs
+</h3>
+
+<p>Gran parte de la funcionalidad de un mapa viene dado por el consumo de servicios proporcionados por APIs externas. 
+  En este sentido vamos a utilizar dos:</p>
+  
+  <p><a href="http://nominatim.openstreetmap.org/" target="_blank"><b>Nominatim</b></a>: Es el buscador por defecto que aparece en la web oficial de OSM</p>          
+<ul>
+  <li>	  
+	  <b>Nominatim: búsqueda topónimos (sólo lista)</b>: Es el ejemplo más b&aacute;sico. El objetivo es obtener un listado de elementos (topónimos) que corresponden con una consulta realizada por el usuario<br/> 
+      <a href="src/api/nominatim/searchname.html" target="_blank">
+      <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+      <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/api/nominatim/searchname.html" target="_blank">
+      <button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a>
+  </li>
+  <li>	  
+	  <b>Nominatim: geocodificación inversa (reverse geocoding)</b>: La geocodificación inversa es una función que te permite obtener una dirección postal a partir 
+	  de unas coordenadas. En este ejemplo se enlaza el evento click en el mapa para obtener las coordenadas y pasárselas a la API de nominatim para obtener la dirección.<br/> 
+      <a href="src/api/nominatim/reverse.html" target="_blank">
+      <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+      <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/api/nominatim/reverse.html" target="_blank">
+      <button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a>
+  </li>
+  <li>	  
+	  <b><img src="images/new.png" width="58" height="24" alt="">
+	  Nominatim: búsqueda por categorías y mapa</b>: En este caso vamos combinando todos los elementos para obtener una navegación más fluida y atractiva. 
+	  Se trata de obtener todos los elementos de una determinada categoría (bar, pub, restaurante, etc). El resultado aparece en un listado. Tiene una apariencia 
+	  similar a Google Maps<br/>
+     <img src="images/captura_searchcategory.png" width="601" height="325" alt="Listado de elementos por categoria"><br>
+      <a href="src/api/nominatim/searchcategory.html" target="_blank">
+      <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+      <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/api/nominatim/searchcategory.html" target="_blank">
+      <button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a>
+  </li>
+
+</ul>
+  <p><b><a href="http://overpass-turbo.eu/" target="_blank">Overpass</a></b>: Es una herramienta de filtrado de datos basado en la web para OpenStreetMap.Con overpass turbo se pueden ejecutar consultas bastante sofisticadas. 
+  El principal problema es que los tiempos de respuesta son un poco largos (ten paciencia y espera un poco)
+ </p>          
+<ul>
+  <li><a href="src/api/overpass/cuartelillos.html" target="_blank">Overpass Turbo: comparsas</a>
+  <img src="images/cuartelillos.png" width="499" height="501" alt="cuartelillos">
+  </li>
+  <li><a href="src/api/overpass/cafes.html" target="_blank">Overpass Turbo: cafeterias</a>
+  </li>
+  <li><a href="src/api/overpass/contenedores.html" target="_blank">Overpass Turbo: medioambiente</a><br/>
+  <img src="images/contenedores.png" width="402" height="402" alt="contenedores">
+  </li>
+</ul>
+          
+<h3>
+   <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true">
+   <span aria-hidden="true" class="octicon octicon-link"></span></a>Proveedores
+</h3>
+
+<p>En el contenedor de mapas utilizado (Leaflet) se dispone de multitud de opciones para añadir capas procedentes de diferentes proveedores. Podemos hacer una primera clasificación entre los proveedores que precisan de conexión a Internet, y luego aquellos que trabajan en modo <i>off-line</i>, porque los datos se encuentran localmente en el servidor.</p>
+<img src="images/tiles.png" width="800" height="492" alt=""><br>
+<p><strong>a) Conexión a Intenet: Proveedores externos de OpenStreetMap</strong></p>
+<ul> 
+  
+  <li>	  
+	  <b>WMS y servicios de tiles externas</b>: Puedes añadir cualquier repositorio de tiles que quieras, incluido servicios WMS, y añadir un men&uacute; de navegación <br/> 
+	  <img src="images/menu_proveedores.png" width="160" height="164" alt=""><br>
+      <a href="src/online/tiles.html" target="_blank">
+      <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+      <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/online/tiles.html" target="_blank">
+      <button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a>
+  </li>    
+  
+  
+  <li><a href="https://leaflet-extras.github.io/leaflet-providers/preview/" target="_blank">Varios proveedores (enlace externo)</a></li>
+</ul>            
+<p><strong>b) Datos en local</strong></p>
+          <p>b.1. Directorio de Tiles: Directorio con una estructura basada en el estándard TMS </p>           
+<ul>
+   <li>	  
+	  <b>Conjunto de imágenes (tiles) en directorio TMS. Sin requerimiento</b>: Si no quieres depender de un servidor puedes 
+	  almacenar en disco tus imágenes (tiles) siguiendo el esquema TMS para un rápido acceso. Es la solucción más económica, pero a costa de tener que mantener un ingente número de imágenes en disco.
+	  <br/> 
+	  <img src="images/tiles_files.png" width="185" height="199" alt=""><br>
+      <a href="src/offline/tiles/index.html" target="_blank">
+      <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+      <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/offline/tiles/index.html" target="_blank">
+      <button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a>
+      <br>
+  </li>  
+  
+  <li><a href="http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/" target="_blank">Nombre y estructura de las tiles - Enlace externo</a></li>
+</ul>           
+          <p>b.2. <b>Fichero MbTiles</b>: Mbtiles, es una base de datos de formato SQLite que contiene una tabla (tiles) que contiene, por cada registro, la imagen correspondiente en formato binario 
+          y el nivel al que pertenece.  Al constar de un único fichero resulta muy práctico para aplicaciones móviles, o webs sin conexión a internet. </p> 
+<ul>
+
+  <li><img src="images/new.png" width="58" height="24" alt=""> <b>Uso de base de datos Mbtiles sin necesidad de un servidor</b>:  
+  Este sistema utiliza exclusivamente Javascript para acceder a la base de datos, por lo que no precisa de peticiones a un servidor (PHP, ASP, Java, etc). Tan solo 
+  necesitamos un navegador de última generación. Este sistema en cambio tiene como inconveniente que en el momento de la carga de la página web tiene que descargarse 
+  en local el archivo mbtiles al que llama, por lo que puede demorarse un poco.
+  <br/>
+  En el ejemplo que os ofrecemos se utiliza una base de datos de la Comunidad Autónoma de Ceuta (5,5 mb) descargada del IGN, en el 
+  apartado <i><a href="http://centrodedescargas.cnig.es/CentroDescargas/catalogo.do#selectedSerie" target="_blank">Descargas para móviles</a></i><br/>
+     <img src="images/captura_mbtiles.png" width="723" height="543" alt="Mbtiles y Javascript"><br>
+    <a href="src/mbtiles/index.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/mbtiles/index.html" target="_blank">
+<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+
+
+
+  <li><b>Documento para generar MbTiles con Qgis</b>: 
+  Este <a href="src/offline/mbtiles/generar_mbtiles_Qgis.odt">documento</a> nos muestra como podemos generar nuestras propias base de datos MbTiles a partir de servicios WMS con Qgis.
+  </li>
+  
+  <li><b>Mbtiles gestionadas por un servidor con PHP</b>:  
+   Este ejemplo Requiere tener instalado en un servidor PHP y PHP-SQLite. Github-pg no admite ejecutar PHP, por ello no funciona la demo aquí, sin embargo te mostramos un enlace externo. <br/>
+   La ventaja de este sistema es que es PHP quien hace las peticiones a la base de datos, descargando sólo aquellas tiles que se precisan mostrar, por lo que la carga inicial es muy rápida.<br/>
+    
+    <a href="https://www.sigua.ua.es/es/test/test.html" target="_blank">
+    <button type="button" >demo externa<i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/offline/mbtiles/ceuta.html" target="_blank">
+<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>  
+  
+
+</ul>            
+          
+<h3>
+   <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true">
+   <span aria-hidden="true" class="octicon octicon-link"></span></a>Aspectos avanzados: Plugins
+</h3>
+
+<p>Leaflet dispone de una amplia variedad de plugins de terceros para proveerlo de funcionalidades extra. 
+  Puedes ver los plugins disponibles <a href="http://leafletjs.com/plugins.html" parent="_blank">aquí</a></p>
+<ul>
+
+
+  <li><img src="images/new.png" width="58" height="24" alt=""> <b>Plugin Leaflet-Photo para Flickr</b>:  
+  Este plugin es una adaptación del <a href="https://github.com/turban/Leaflet.Photo" target="_blank">plugin Photo</a> adaptado para visualizar la posición de las fotografías georreferenciadas 
+  que se encuentran en la cuenta de un usuario de Flickr. La razón es que Picasa, el sistema original, tiende a ser sustituido por Google Photo, y Flickr, además de permitir hasta 1 Terabyte de 
+  fotos, dispone de un API Rest muy bien estructurada. 
+  <br/>
+  En el ejemplo que os ofrecemos puedes ver las fotos que he realizado por diferentes países. <br/>
+     <img src="images/captura_flickr.png" width="607" height="401" alt="Leaflet y Flickr"><br>
+    <a href="src/plugin/photo/index.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/plugin/photo/index.html" target="_blank">
+	<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+
+  <li><img src="images/new.png" width="58" height="24" alt=""> <b>Plugin oficial de Flickr para Leaflet</b>:  
+  Este <a href="https://github.com/shurshur/Leaflet.Flickr" target="_blank">plugin</a> muestra en el mapa un icono con todas las fotos georreferenciadas. Permite llamadas AJAX y JSONP  <br/>
+     <img src="images/captura_flickr_plugin.png" width="601" height="392" alt="Leaflet y Flickr"><br>
+    <a href="src/plugin/flickr/index.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/plugin/flickr/index.html" target="_blank">
+	<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+
+
+  <li> <b>Leaflet-Photo</b>:  
+  geolocaliza imágenes ya georeferenciadas. 
+    Este plugin precisa de PHP.</a> No podrás ver el resultado porque Github-pg no admite PHP.   <br/>      
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/extra/photo/index.html" target="_blank">
+	<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li>
+
+  <li> <b>Migration layer</b>:  
+     Genera mapas de flujo con un resultado gráfico muy atractivo.  Sí quieres conocer más como funciona puedes consultar la
+    <a href>https://github.com/react-map/leaflet.migrationLayer</a>fuente original</a></a> <br/> 
+    <img src="images/captura_emigration.png" width="761" height="435" alt="Leaflet migration"><br>
+    <a href="src/plugin/migration/demo1.html" target="_blank">
+    <button type="button" >demo 1 <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |       
+    <a href="src/plugin/migration/demo2.html" target="_blank">
+    <button type="button" >demo 2 <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/plugin/migration/demo1.html" target="_blank">
+	<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a>
+  </li>
+  
+  <li> <b>Story map</b>:  
+     Este plugin nos permite conforme nos desplazamos por el texto localizaciones predeterminadas. Es la forma más edecuada de presentar un directorio. 
+     Si quieres conocer más como funciona puedes consultar el
+    <a href="https://github.com/atlefren/storymap" target="_blank">proyecto original</a> <br/>  
+    <a href="src/plugin/storymap/index.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> | 
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/plugin/storymap/index.html" target="_blank">
+	<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a>
+  </li>  
+  
+</ul>          
+
+          
+          
+<h3>
+   <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true">
+   <span aria-hidden="true" class="octicon octicon-link"></span></a>Cálculo de rutas (Routing)
+</h3>          
+
+<p>OpenStreetMap nació como un callejero digital, por lo que la funcionalidad de cálculo de rutas es la principal 
+  de las utilidades que pueden ejercerse sobre este conjunto de datos. Hay varias formas de tratar este tema. Aquí 
+  verás los proyectos más destacados</p>          
+ 
+<ul>
+ 
+ 
+  <li><img src="images/new.png" width="58" height="24" alt=""> <b>Open Source Routing Machine</b>:  
+  <a href="http://project-osrm.org/" target="_blank">OSRM</a> es el motor de routing "oficial" de OpenStretMap. Se caracteriza por su rapidez y por disponer de un API pública sobre 
+      la que vertebrar todo su poder. 
+  <br/>
+  En el ejemplo que os ofrecemos puedes ver las capacidades de este sistema: geocodificación inversa para obtener direcciones postales con un simple golpe de ratón, cálculo de ruta, 
+  alternativa a la ruta principal, mensaje de navegación pormenorizado, uso de distintos idiomas, etc. <br/>
+     <img src="images/captura_osrm.png" width="773" height="543" alt="Captura OSRM"><br>
+    <a href="src/osrm/index.html" target="_blank">
+    <button type="button" >demo <i class="fa fa-cogs fa-2" aria-hidden="true"></i></button></a> |  
+    <a href="https://github.com/josemamira/osmTestMap/blob/gh-pages/src/osrm/index.html" target="_blank">
+	<button type="button" >código <i class="fa fa-github fa-2" aria-hidden="true"></i></button></a></li> 
+ 
+
+    <li><a href="http://pgrouting.org/">PgRouting</a> es otro de los grandes proyectos para cálculo de rutas. 
+      Se trata de una extensión para la base de datos PostgreSQL. En principio trabaja sobre cualquier tipo de red, pero 
+      es en OpenStreetMap donde se han centrado las herramientas para transformar el "Planet" de OSM en datos "routables" 
+      y funciones para sacarle partido.
+    </li>      
+</ul>           
+<table>
+  <tr>
+    <td><img src="images/osrm_logo.svg" width="199" height="67" alt=""></td>
+    <td><img src="images/pgrouting.png" width="130" height="126" alt=""></td>
+  </tr>
+</table>          
+          
+          
+<h3>
+<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" 
+   aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Enlaces de interés</h3>
+
+<p>Aquí podrás ver alguno de los proyectos más interesantes sobre OpenStreetMap</p>
+<ul>
+  <li><a href="http://osmlab.github.io/show-me-the-way/" target="_blank">Cambios en tiempo real</a></li>
+  <li><a href="http://wiki.openstreetmap.org/wiki/ES:Map_Features" target="_blank">Elementos cartografiables</a></li>
+  <li><a href="http://wiki.openstreetmap.org/wiki/Timelapse_videos" target="_blank">Videos con la evolución de OSM</a></li>
+  <li><a href="http://tools.geofabrik.de/mc/#15/38.5355/-0.8218&num=3&mt0=mapnik&mt1=google-map&mt2=here-map" target="_blank">Comparativa de mapas (OSM, GMaps, Here)</a></li>
+  <li><a href="http://tools.geofabrik.de/calc/#type=geofabrik_standard&bbox=-1.136133,37.881308,0.24839,38.915864" target="_blank">Cálculo tamaño directorio de tiles</a></li>
+  <li><a href="https://hotosm.org/" target="_blank">HOT Humanitarian OpenStreetMap Team</a></li>
+  <li><a href="http://wiki.openstreetmap.org/wiki/List_of_OSM-based_services" target="_blank">Listado servicios OSM</a></li>
+  <li><a href="http://fieldpapers.org/" target="_blank">Crear PDF para trabajo de campo (sucesor de Walking Paper)</a></li>
+  <li><a href="https://maposmatic.osm-baustelle.de/" target="_blank">Maposmatic: Para crear atlas en PDF con listado de calles</a></li>
+
+  
+  
+  
+</ul>
+          
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"
+   ><span aria-hidden="true" class="octicon octicon-link"></span></a>Autor y contribuciones</h3>
+
+<p>Los ejemplos de esta web han sido realizados por José Manuel Mira Martínez. Sí se ha utilizado código de otro proyecto libre en el código fuente aparece citado.</p>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true">
+  <span aria-hidden="true" class="octicon octicon-link"></span></a>Contacto</h3>
+
+<p>Puedes ponerte en contacto en esta dirección de correo: <a href="mailto:josema.mira@gmail.com">josema.mira@gmail.com</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/josemamira/osmTestMap/archive/gh-pages.zip" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/josemamira/osmTestMap/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/josemamira/osmTestMap"></a> is maintained by <a href="https://github.com/josemamira">josemamira</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>

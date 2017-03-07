@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Nominatim búsqueda</title>
+	<meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+            font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 95%;
+    background-color: #f1f1f1;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>              
+            </ul>
+
+            <ul role="tablist">
+                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    Localiza
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+  
+                <p class="lorem">Selecciona lo que quieres buscar.</p>
+                <p>
+					<select id="opciones">
+					  <option value="nada">SELECCIONA UNA CATEGOR&Iacute;A</option>
+					  <option value="bakery">Panadería</option>
+					  <option value="cafe">Cafetería</option>
+					  <option value="restaurant">Restaurante</option>
+					  <option value="pub">pub</option>
+					  <option value="bar">bar</option>
+					  <option value="bank">bancos/cajas</option>
+					  <option value="parking">parking</option>						
+					</select> 
+					<button onclick="getPois()">Buscar</button> 
+				</p>
+				<p><div id="cuenta"></div></p>
+				<ul id="listado"></ul>
+				<p><div id="info"></div></p>
+
+            </div>
+            
+             <div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>           
+            
+
+
+        </div>
+    </div>
+
+    <div id="map" class="sidebar-map"></div>
+    <script src="../../../javascripts/jquery/jquery-3.1.1.min.js"></script>
+    <script src="../../../javascripts/leaflet/leaflet.js"></script>
+    <script src="js/leaflet-sidebar.js"></script>
+
+    <script>
+		
+	var map = L.map('map').setView([38.476523, -0.795769], 14);
+	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	L.tileLayer(osmUrl, {	
+		attribution: '<a href="http://www.elda.es">Elda</a> | &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+	}).addTo(map);
+	var marker = L.marker([51.2, 7]).addTo(map);	
+	
+	var sidebar = L.control.sidebar('sidebar').addTo(map);
+	sidebar.open('home');
+        
+// icono
+	
+var myIcon = L.icon({
+    iconUrl: '../../../javascripts/leaflet/images/marker-icon.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+});    
+// zoom al elemento
+function zoomTo(lat,lng) {
+	if (circulo != undefined) {
+      map.removeLayer(circulo);
+    };
+    var circulo = L.circle([lat, lng], 10, {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity:0.5
+	}).addTo(map);
+    
+    
+    
+    // set the view
+    map.setView([lat, lng], 18);
+}
+
+/**
+ * Variables necesarias para la funcionalidad de crear geojson 
+ */ 
+var FG = new L.FeatureGroup().addTo(map);
+var gj= L.geoJson();
+
+/**
+ * Función para limpiar los geojson cargados en la layer "gj", y luego elimina el FG (FeatureGroup).
+ * Las variables se han declarado arriba de esta función   
+ **/
+function limpiarJSON() {
+    FG.clearLayers();
+    map.removeLayer(FG);
+    $( "#listado" ).empty();
+    //alert("listado borrado");
+}	    
+	    
+// Evento click al boton btnSubmit
+
+
+function getPois() {
+	limpiarJSON();
+	var selIdx=document.getElementById("opciones").selectedIndex;
+	var selValue = document.getElementsByTagName("option")[selIdx].value;//alert(selValue);
+	if (selValue == "nada")  { 
+		alert("Selecciona una categoría");
+	} else {
+
+	//var viewbox = "-0.83990,38.54390,-0.79702,38.52040";
+	var viewbox = "-0.824,38.496,-0.781,38.457";
+	var geocode = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox='+viewbox+'&bounded=1'; //alert(geocode);
+
+
+	$.ajax({ 
+		type: 'GET', 
+		url: geocode, 
+		//data: { get_param: 'value' }, 
+		dataType: 'json',
+		success: function (data) { 
+			$("#cuenta").html("Encontrados: <strong>"+data.length +"</strong>");
+			eval(data);
+			if (gj != undefined)
+			{
+				if(typeof gj != undefined)
+				{
+					//alert("ya existe y lo borro");
+					limpiarJSON();
+				}	
+				
+				$.each(data, function(i, value) {
+					// Listado
+					$( "#listado" ).append( "<li><a href='#'onclick='zoomTo("+data[i].lat+","+ data[i].lon+")' >"+
+						"<img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+data[i].display_name+"</a>"+
+						"<a href='https://www.openstreetmap.org/"+data[i].osm_type+"/"+data[i].osm_id+"'  target='_blank' ><button>Detalles</button></a><HR></li>" );
+
+					// crear markers
+					var pos = new L.LatLng(data[i].lat, data[i].lon);
+					gj = L.marker(pos);
+					//gj = L.marker([data[i].lat, data[i].lon]);
+					//popup
+					var popup = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
+					gj.bindPopup(popup);
+					FG.addLayer(gj);
+					FG.addTo(map);  
+					var bounds = FG.getBounds(); 
+					map.fitBounds(bounds);	
+				});
+			}
+		}
+	});   
+  }
+} 	
+
+	
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mapa de flujo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	
+    <style>
+    html,body{
+        margin: 0;
+        padding: 0;
+    }
+    #map{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    #event{
+        position: absolute;
+        top: 50px;
+        right: 600px;
+        height: 100px;
+        width: 400px;
+        z-index: 10000;
+    }
+    .btn{
+        border-color:gray;
+        border-width: 2px;
+        background-color:white;
+   }
+   <!-- leyenda -->
+	.legend {
+		line-height: 18px;
+		color: #555;
+	}
+	.legend i {
+		width: 18px;
+		height: 18px;
+		float: left;
+		margin-right: 8px;
+		opacity: 0.7;
+	}   
+   
+   
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id='event'>
+		<input type="button" value="Inmigracion en Elda" class="btn" onclick="emigra()">
+        <input type="button" value="ocultar" class="btn" onclick="hide()">
+        <input type="button" value="mostrar" class="btn" onclick="show()">
+        <input type="button" value="pausa" class="btn" onclick="pause()">
+        <input type="button" value="play" class="btn" onclick="play()">
+        
+    </div>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src='./dist/leaflet.migrationLayer.js'></script>
+    <script>
+        var map = L.map('map').setView([30, 0], 3);
+        var negro   = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiajNtIiwiYSI6ImNpb3R4Z3FkMzAwMzB2dGtqYmlxcTlhNjYifQ.NjYz5j05SJiXXQ0Ul6_IGQ', {attribution: 'MapBox'}),
+		osm  = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'OSM'});
+        negro.addTo(map);
+        
+    // Control de capas    
+	var baseLayers = {
+		"MapBox": negro,
+		"OpenStreetMap": osm
+	};
+	L.control.layers(baseLayers).addTo(map); 
+	
+	// Leyenda
+	var legend = L.control({position: 'bottomright'});
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend');
+		div.innerHTML =	
+			'<i style="background:#FF0000"></i>&nbsp; Mucho<br>'+
+			'<i style="background:#FE9A2E"></i>&nbsp; Medio<br>'+
+			'<i style="background:#F3F781"></i>&nbsp; Poco<br>';
+		return div;
+	};
+	legend.addTo(map);       
+        
+  
+         
+//  http://documentacion.diputacionalicante.es/4hogares.asp?codigo=03066 
+        var data = [
+{"from":[136.189,-24.973],"to":[-0.795167,38.476777],"labels":["4","Elda"],"color":"#F3F781"},
+{"from":[8.105,9.594],"to":[-0.795167,38.476777],"labels":["5","Elda"],"color":"#F3F781"},
+{"from":[-56.012,-32.8],"to":[-0.795167,38.476777],"labels":["9","Elda"],"color":"#F3F781"},
+{"from":[-69.433,-23.389],"to":[-0.795167,38.476777],"labels":["10","Elda"],"color":"#F3F781"},
+{"from":[-75.552,-9.326],"to":[-0.795167,38.476777],"labels":["15","Elda"],"color":"#F3F781"},
+{"from":[25.231,42.761],"to":[-0.795167,38.476777],"labels":["16","Elda"],"color":"#F3F781"},
+{"from":[-14.881,15.013],"to":[-0.795167,38.476777],"labels":["20","Elda"],"color":"#F3F781"},
+{"from":[-53.089,-10.772],"to":[-0.795167,38.476777],"labels":["20","Elda"],"color":"#F3F781"},
+{"from":[-70.729,19.015],"to":[-0.795167,38.476777],"labels":["22","Elda"],"color":"#F3F781"},
+{"from":[-8.058,40.309],"to":[-0.795167,38.476777],"labels":["24","Elda"],"color":"#FE9A2E"},
+{"from":[9.851,51.11],"to":[-0.795167,38.476777],"labels":["26","Elda"],"color":"#FE9A2E"},
+{"from":[-1.6,53],"to":[-0.795167,38.476777],"labels":["28","Elda"],"color":"#FE9A2E"},
+{"from":[-58.391,-23.236],"to":[-0.795167,38.476777],"labels":["29","Elda"],"color":"#FE9A2E"},
+{"from":[2.55,46.565],"to":[-0.795167,38.476777],"labels":["30","Elda"],"color":"#FE9A2E"},
+{"from":[-77.781,21.297],"to":[-0.795167,38.476777],"labels":["31","Elda"],"color":"#FE9A2E"},
+{"from":[-64.671,-16.715],"to":[-0.795167,38.476777],"labels":["39","Elda"],"color":"#FE9A2E"},
+{"from":[19.401,52.125],"to":[-0.795167,38.476777],"labels":["40","Elda"],"color":"#FE9A2E"},
+{"from":[37.61556,55.75222],"to":[-0.795167,38.476777],"labels":["45","Elda"],"color":"#FE9A2E"},
+{"from":[69.386,29.967],"to":[-0.795167,38.476777],"labels":["45","Elda"],"color":"#FE9A2E"},
+{"from":[-66.166,7.125],"to":[-0.795167,38.476777],"labels":["48","Elda"],"color":"#FE9A2E"},
+{"from":[12.8,42.7],"to":[-0.795167,38.476777],"labels":["50","Elda"],"color":"#FF0000"},
+{"from":[-65.167,-35.377],"to":[-0.795167,38.476777],"labels":["70","Elda"],"color":"#FF0000"},
+{"from":[116.39723,39.9075],"to":[-0.795167,38.476777],"labels":["105","Elda"],"color":"#FF0000"},
+{"from":[-78.497,-1.385],"to":[-0.795167,38.476777],"labels":["106","Elda"],"color":"#FF0000"},
+{"from":[31.388,49.016],"to":[-0.795167,38.476777],"labels":["120","Elda"],"color":"#FF0000"},
+{"from":[2.632,28.163],"to":[-0.795167,38.476777],"labels":["140","Elda"],"color":"#FF0000"},
+{"from":[-5.758,32.706],"to":[-0.795167,38.476777],"labels":["266","Elda"],"color":"#FF0000"},
+{"from":[-73.076,3.9],"to":[-0.795167,38.476777],"labels":["329","Elda"],"color":"#FF0000"},
+{"from":[24.969,45.844],"to":[-0.795167,38.476777],"labels":["369","Elda"],"color":"#FF0000"}
+		];
+
+ 
+
+        var migrationLayer = new L.migrationLayer({
+            map: map,
+            data: data,
+            pulseRadius:30,
+            pulseBorderWidth:3,
+            arcWidth:1,
+            arcLabel:true,
+            arcLabelFont:'10px sans-serif',
+            }
+        );
+        migrationLayer.addTo(map);
+
+        function emigra(){
+            migrationLayer.setData(data);
+        } 
+        function setData(){
+            migrationLayer.setData(data2);
+        }
+        function hide(){
+            migrationLayer.hide();
+        }
+        function show(){
+            migrationLayer.show();
+        }
+        function play(){
+            migrationLayer.play();
+        }
+        function pause(){
+            migrationLayer.pause();
+        }
+
+
+    </script>
+</body>
+
+</html>

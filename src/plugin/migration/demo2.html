@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Migration Layer</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	
+    <style>
+    html,body{
+        margin: 0;
+        padding: 0;
+    }
+    #map{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    #event{
+        position: absolute;
+        top: 50px;
+        right: 600px;
+        height: 100px;
+        width: 400px;
+        z-index: 10000;
+    }
+    .btn{
+        border-color:gray;
+        border-width: 2px;
+        background-color:white;
+   }
+   <!-- leyenda -->
+	.legend {
+		line-height: 18px;
+		color: #555;
+	}
+	.legend i {
+		width: 18px;
+		height: 18px;
+		float: left;
+		margin-right: 8px;
+		opacity: 0.7;
+	}   
+   
+   
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id='event'>
+		<input type="button" value="Emigracion" class="btn" onclick="emigra()">
+        <input type="button" value="Inmigracion" class="btn" onclick="setData()">
+        <input type="button" value="Exportaciones" class="btn" onclick="exporta()">
+        <input type="button" value="Importaciones" class="btn" onclick="importa()">
+        <input type="button" value="ocultar" class="btn" onclick="hide()">
+        <input type="button" value="mostrar" class="btn" onclick="show()">
+        <input type="button" value="pausa" class="btn" onclick="pause()">
+        <input type="button" value="play" class="btn" onclick="play()">
+        
+    </div>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src='./dist/leaflet.migrationLayer.js'></script>
+    <script>
+        var map = L.map('map').setView([30, 0], 3);
+        var negro   = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiajNtIiwiYSI6ImNpb3R4Z3FkMzAwMzB2dGtqYmlxcTlhNjYifQ.NjYz5j05SJiXXQ0Ul6_IGQ', {attribution: 'MapBox'}),
+		osm  = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'OSM'});
+        negro.addTo(map);
+        
+    // Control de capas    
+	var baseLayers = {
+		"MapBox": negro,
+		"OpenStreetMap": osm
+	};
+	L.control.layers(baseLayers).addTo(map); 
+	
+	// Leyenda
+	var legend = L.control({position: 'bottomright'});
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend');
+		div.innerHTML =	
+			'<i style="background:#610B0B"></i>&nbsp; Muchísimo<br>'+
+			'<i style="background:#FF0000"></i>&nbsp; Mucho<br>'+
+			'<i style="background:#FE9A2E"></i>&nbsp; Medio<br>'+
+			'<i style="background:#F3F781"></i>&nbsp; Poco<br>';
+		return div;
+	};
+	legend.addTo(map);       
+        
+  
+  
+  
+        
+        
+        
+//https://es.wikipedia.org/wiki/Emigraci%C3%B3n_espa%C3%B1ola
+        var data = [{"from":[-3.702203,40.418008 ],"to":[-63.581733,-38.280310],"labels":["España","Argentina"],"color":"#b30000"},{"from":[-3.702203,40.418008 ],"to":[2.522924,48.807785],"labels":["España","Francia"],"color":"#b30000"},{"from":[-3.702203,40.418008 ],"to":[13.400195,52.584627],"labels":["España","Alemania"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-43.411053,-22.452404],"labels":["España","Brasil"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-66.908221,10.484589],"labels":["España","Venezuela"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-82.375973,23.112236],"labels":["España","Cuba"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-99.125082,19.428242],"labels":["España","México"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-95.736768,37.047899],"labels":["España","Estados Unidos"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[7.438292,46.961646],"labels":["España","Suiza"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-0.133191,51.505485],"labels":["España","Reino Unido"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-56.166006,-34.894298],"labels":["España","Uruguay"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-70.662797,-33.449223],"labels":["España","Chile"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[4.350326,50.848885],"labels":["España","Bélgica"],"color":"#e34a33"},{"from":[-3.702203,40.418008 ],"to":[-74.073484,4.706454],"labels":["España","Colombia"],"color":"#fef0d9"},{"from":[-3.702203,40.418008 ],"to":[1.521395,42.506129],"labels":["España","Andorra"],"color":"#fef0d9"},{"from":[-3.702203,40.418008 ],"to":[4.896209,52.369351],"labels":["España","Países Bajos"],"color":"#fef0d9"},{"from":[-3.702203,40.418008 ],"to":[12.492045,41.900787],"labels":["España","Italia"],"color":"#fef0d9"},{"from":[-3.702203,40.418008 ],"to":[-77.042047,-12.046909],"labels":["España","Perú"],"color":"#fef0d9"},{"from":[-3.702203,40.418008 ],"to":[-69.934467,18.490467],"labels":["España","República Dominicana"],"color":"#fef0d9"},{"from":[-3.702203,40.418008 ],"to":[133.415718,-23.911882],"labels":["España","Australia"],"color":"#fef0d9"}];
+ // https://es.wikipedia.org/wiki/Inmigraci%C3%B3n_en_Espa%C3%B1a       
+        var data2= [{"from":[25,46],"to":[-3.702203,40.418008 ],"labels":["Rumania","España"],"color":"#610B0B"},{"from":[-6,32],"to":[-3.702203,40.418008 ],"labels":["Marruecos","España"],"color":"#610B0B"},{"from":[-2.6,54.7],"to":[-3.702203,40.418008 ],"labels":["Reino Unido","España"],"color":"#610B0B"},{"from":[12.8,42.8],"to":[-3.702203,40.418008 ],"labels":["Italia","España"],"color":"#610B0B"},{"from":[-78.25,-1.25],"to":[-3.702203,40.418008 ],"labels":["Ecuador","España"],"color":"#610B0B"},{"from":[105,35],"to":[-3.702203,40.418008 ],"labels":["China","España"],"color":"#610B0B"},{"from":[10.5,51.5],"to":[-3.702203,40.418008 ],"labels":["Alemania","España"],"color":"#610B0B"},{"from":[-73.25,4],"to":[-3.702203,40.418008 ],"labels":["Colombia","España"],"color":"#610B0B"},{"from":[25.25,42.66],"to":[-3.702203,40.418008 ],"labels":["Bulgaria","España"],"color":"#FF0000"},{"from":[-8.13,39.69],"to":[-3.702203,40.418008 ],"labels":["Portugal","España"],"color":"#FF0000"},{"from":[-65,-17],"to":[-3.702203,40.418008 ],"labels":["Bolivia","España"],"color":"#FF0001"},{"from":[2,46],"to":[-3.702203,40.418008 ],"labels":["Francia","España"],"color":"#FF0001"},{"from":[32,49],"to":[-3.702203,40.418008 ],"labels":["Ucrania","España"],"color":"#FF0002"},{"from":[-64,-34],"to":[-3.702203,40.418008 ],"labels":["Argentina","España"],"color":"#FF0002"},{"from":[70,30],"to":[-3.702203,40.418008 ],"labels":["Pakistán","España"],"color":"#FF0003"},{"from":[-70.66,19],"to":[-3.702203,40.418008 ],"labels":["República Dominicana","España"],"color":"#FE9A2E"},{"from":[-55,-10],"to":[-3.702203,40.418008 ],"labels":["Brasil","España"],"color":"#FE9A2E"},{"from":[-75.25,-10],"to":[-3.702203,40.418008 ],"labels":["Perú","España"],"color":"#FE9A2E"},{"from":[-58,-23.33],"to":[-3.702203,40.418008 ],"labels":["Paraguay","España"],"color":"#FE9A2E"},{"from":[20,52],"to":[-3.702203,40.418008 ],"labels":["Polonia","España"],"color":"#FE9A2E"},{"from":[100,60],"to":[-3.702203,40.418008 ],"labels":["Rusia","España"],"color":"#FE9A2E"},{"from":[3,28],"to":[-3.702203,40.418008 ],"labels":["Argelia","España"],"color":"#FE9A2E"},{"from":[-14.25,14.5],"to":[-3.702203,40.418008 ],"labels":["Senegal","España"],"color":"#F3F774"},{"from":[-66,8],"to":[-3.702203,40.418008 ],"labels":["Venezuela","España"],"color":"#F3F775"},{"from":[-79.5,22],"to":[-3.702203,40.418008 ],"labels":["Cuba","España"],"color":"#F3F776"},{"from":[5.75,52.25],"to":[-3.702203,40.418008 ],"labels":["Países Bajos","España"],"color":"#F3F777"},{"from":[8,10],"to":[-3.702203,40.418008 ],"labels":["Nigeria","España"],"color":"#F3F778"},{"from":[4.5,50.75],"to":[-3.702203,40.418008 ],"labels":["Bélgica","España"],"color":"#F3F779"},{"from":[-56,-33],"to":[-3.702203,40.418008 ],"labels":["Uruguay","España"],"color":"#F3F780"},{"from":[-71,-30],"to":[-3.702203,40.418008 ],"labels":["Chile","España"],"color":"#F3F781"}];
+        // exportaciones española (INE)
+        var data3= [
+        {"from":[-3.702203,40.418008 ],"to":[105,35],"labels":["España","China"],"color":"#610B0B"},
+{"from":[-3.702203,40.418008 ],"to":[-98.5,39.76],"labels":["España","Estados Unidos"],"color":"#610B0B"},
+{"from":[-3.702203,40.418008 ],"to":[10.5,51.5],"labels":["España","Alemania"],"color":"#610B0B"},
+{"from":[-3.702203,40.418008 ],"to":[139.75,35.68],"labels":["España","Japón"],"color":"#610B0B"},
+{"from":[-3.702203,40.418008 ],"to":[5.75,52.25],"labels":["España","Países Bajos"],"color":"#610B0B"},
+{"from":[-3.702203,40.418008 ],"to":[1,46],"labels":["España","Francia"],"color":"#FF0000"},
+{"from":[-3.702203,40.418008 ],"to":[127.75,36.5],"labels":["España","Corea, República de"],"color":"#FF0000"},
+{"from":[-3.702203,40.418008 ],"to":[100,60],"labels":["España","Federación Rusa"],"color":"#FF0000"},
+{"from":[-3.702203,40.418008 ],"to":[12.83,42.83],"labels":["España","Italia"],"color":"#FF0000"},
+{"from":[-3.702203,40.418008 ],"to":[-2.69,57.75],"labels":["España","Reino Unido"],"color":"#FF0000"},
+{"from":[-3.702203,40.418008 ],"to":[4.5,50.75],"labels":["España","Bélgica"],"color":"#FE9A2E"},
+{"from":[-3.702203,40.418008 ],"to":[114.15,22.25],"labels":["España","China, Hong Kong SAR"],"color":"#FE9A2E"},
+{"from":[-3.702203,40.418008 ],"to":[-113.64,60.108],"labels":["España","Canadá"],"color":"#FE9A2E"},
+{"from":[-3.702203,40.418008 ],"to":[103.8,1.33],"labels":["España","Singapur"],"color":"#FE9A2E"},
+{"from":[-3.702203,40.418008 ],"to":[-102,23],"labels":["España","México"],"color":"#FE9A2E"},
+{"from":[-3.702203,40.418008 ],"to":[45,25],"labels":["España","Arabia Saudita"],"color":"#F3F781"},
+{"from":[-3.702203,40.418008 ],"to":[54.5,23.75],"labels":["España","Emiratos Árabes Unidos"],"color":"#F3F781"},
+{"from":[-3.702203,40.418008 ],"to":[79,22],"labels":["España","India"],"color":"#F3F781"},
+{"from":[-3.702203,40.418008 ],"to":[135,-25],"labels":["España","Australia"],"color":"#F3F781"},
+{"from":[-3.702203,40.418008 ],"to":[-55,-10],"labels":["España","Brasil"],"color":"#F3F781"}
+        ];
+
+		// importaciones  a España (INE)
+		var data4 = [{"from":[-98.5,39.76],"to":[-3.702203,40.418008 ],"labels":["Estados Unidos","España"],"color":"#610B0B"},
+{"from":[105,35],"to":[-3.702203,40.418008 ],"labels":["China","España"],"color":"#610B0B"},
+{"from":[10.5,51.5],"to":[-3.702203,40.418008 ],"labels":["Alemania","España"],"color":"#610B0B"},
+{"from":[139.75,35.68],"to":[-3.702203,40.418008 ],"labels":["Japón","España"],"color":"#610B0B"},
+{"from":[1,46],"to":[-3.702203,40.418008 ],"labels":["Francia","España"],"color":"#610B0B"},
+{"from":[-2.69,57.75],"to":[-3.702203,40.418008 ],"labels":["Reino Unido","España"],"color":"#FF0000"},
+{"from":[114.15,22.25],"to":[-3.702203,40.418008 ],"labels":["China, Hong Kong SAR","España"],"color":"#FF0000"},
+{"from":[127.75,36.5],"to":[-3.702203,40.418008 ],"labels":["Corea, República de","España"],"color":"#FF0000"},
+{"from":[5.75,52.25],"to":[-3.702203,40.418008 ],"labels":["Países Bajos","España"],"color":"#FF0000"},
+{"from":[12.83,42.83],"to":[-3.702203,40.418008 ],"labels":["Italia","España"],"color":"#FF0000"},
+{"from":[79,22],"to":[-3.702203,40.418008 ],"labels":["India","España"],"color":"#FE9A2E"},
+{"from":[-113.64,60.108],"to":[-3.702203,40.418008 ],"labels":["Canadá","España"],"color":"#FE9A2E"},
+{"from":[4.5,50.75],"to":[-3.702203,40.418008 ],"labels":["Bélgica","España"],"color":"#FE9A2E"},
+{"from":[-102,23],"to":[-3.702203,40.418008 ],"labels":["México","España"],"color":"#FE9A2E"},
+{"from":[103.8,1.33],"to":[-3.702203,40.418008 ],"labels":["Singapur","España"],"color":"#FE9A2E"},
+{"from":[100,60],"to":[-3.702203,40.418008 ],"labels":["Federación Rusa","España"],"color":"#F3F781"},
+{"from":[25,39],"to":[-3.702203,40.418008 ],"labels":["Turquía","España"],"color":"#F3F781"},
+{"from":[101,15,5],"to":[-3.702203,40.418008 ],"labels":["Tailandia","España"],"color":"#F3F781"},
+{"from":[54.5,23.75],"to":[-3.702203,40.418008 ],"labels":["Emiratos Árabes Unidos","España"],"color":"#F3F781"},
+{"from":[-55,-10],"to":[-3.702203,40.418008 ],"labels":["Brasil","España"],"color":"#F3F781"},
+{"from":[135,-25],"to":[-3.702203,40.418008 ],"labels":["Australia","España"],"color":"#F3F781"}
+
+];
+
+        var migrationLayer = new L.migrationLayer({
+            map: map,
+            data: data,
+            pulseRadius:30,
+            pulseBorderWidth:3,
+            arcWidth:1,
+            arcLabel:true,
+            arcLabelFont:'10px sans-serif',
+            }
+        );
+        migrationLayer.addTo(map);
+
+        function emigra(){
+            migrationLayer.setData(data);
+        } 
+        function setData(){
+            migrationLayer.setData(data2);
+        }
+        function hide(){
+            migrationLayer.hide();
+        }
+        function show(){
+            migrationLayer.show();
+        }
+        function play(){
+            migrationLayer.play();
+        }
+        function pause(){
+            migrationLayer.pause();
+        }
+        function exporta() {
+            migrationLayer.setData(data3);
+        }
+        function importa() {
+            migrationLayer.setData(data4);
+        }
+
+    </script>
+</body>
+
+</html>

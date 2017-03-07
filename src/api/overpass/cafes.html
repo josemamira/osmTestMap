@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet OverPass Layer demo page (cuartelillos)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+   
+
+    <script src="../../../javascripts/leaflet/leaflet.js"></script>
+	<script src="../../../javascripts/overpass/OverPassLayer.bundle.js"></script>
+
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        .leaflet-control-minZoomIndicator {
+		    font-size: 2em;
+		    background: #FFFF00;
+		    background-color: #FF0000; 
+		    border-radius: 10px;
+		    padding: 1px 15px;
+		    opacity: 1;
+		} 
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
+            attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
+        var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: [attr_osm, attr_overpass].join(', ')
+        });
+
+        var map = new L.Map('map').addLayer(osm).setView(new L.LatLng(38.4773559, -0.7947678), 15);
+        
+    var mycIcon = L.icon({
+		iconUrl: 'cafe.svg',
+		iconSize:     [25, 25], // size of the icon
+		iconAnchor:   [22, 25], // point of the icon which will correspond to marker's location
+		popupAnchor:  [-3, -28] // point from which the popup should open relative to the iconAnchor
+		});        
+        
+		
+        var opl = new L.OverPassLayer({
+            debug: true,
+            endPoint: 'https://overpass-api.de/api/',
+            query: 'node({{bbox}})["amenity"="cafe"];out;', 
+            markerIcon:  mycIcon,    
+            minZoomIndicatorOptions: {
+                position: 'topright',
+                minZoomMessage: 'Zoom actual: CURRENTZOOM - Datos a nivel: MINZOOMLEVEL'
+            }
+        });
+        map.addLayer(opl);
+    </script>
+</body>
+
+</html>

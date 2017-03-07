@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet PHP/MBTiles</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+</head>
+<body>
+
+	<div id="map" style="width: 600px; height: 400px"></div>
+	<p>Este ejemplo demuestra el uso de dos ficheros MbTiles</p>
+	<ul>
+		<li><strong>alacant.mbtiles</strong> (420 Mb): Procedente de la cartografía base del IGN. Niveles 10 al 15. Ámbito: provincia de Alicante</li>
+		<li><strong>sax_pnoa_16_20.mbtiles</strong> (185 Mb): Procedente del WMS del PNOA. Niveles 16 al 20: Ámbito: zona urbana Sax</li>
+	</ul>
+	<p>Para utilizar esta utilidad necesitas:</p>
+        <ul>
+            <li>Un servidor web (Apache), PHP y PHP-PDO</li>
+            <li>Descarga el script PHP-MBTiles-Server PHP desde aquí: <a href="https://github.com/bmcbride/PHP-MBTiles-Server/blob/master/mbtiles.php" target="_blank">PHP-MBTiles-Server</a> (requires PHP/PDO).</li>
+         </ul>
+    </p>
+	<script src="../../../javascripts/leaflet/leaflet.js"></script>
+	<script>
+		var map;		
+	
+		var ceuta = new L.tileLayer('https://www.sigua.ua.es/es/test/mbtiles.php?db=ceuta.mbtiles?dl=1&z={z}&x={x}&y={y}', {
+		    tms: true,
+		    attribution: 'Cortesia del <a href="http://www.ign.es" target="_blank">IGN</a>',
+		    opacity: 0.7
+		});
+
+
+		map = new L.Map("map",{
+			//minZoom:10,
+			//maxZoom:19,
+			zoom: 18,
+            		center: [35.8885380012,-5.3185921685],
+			layers: [ceuta]
+		});
+		L.marker([35.8885380012,-5.3185921685]).addTo(map);
+
+
+
+		//ceuta.addTo(map);
+
+	</script>
+</body>
+</html>

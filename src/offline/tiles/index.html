@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Tiles mapa sax (niveles 16 a 19)</title>
+	<meta charset="utf-8" />
+        <link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 100%; padding: 0; margin: 0; background: #fff;"></div>
+    <script src="../../../javascripts/leaflet/leaflet.js"></script>
+
+    <script>
+		// limite navegación 
+		var SW = L.latLng(38.467, -0.805),
+			NE = L.latLng(38.486, -0.783),
+			bbox = L.latLngBounds(SW, NE);
+        var map = L.map('map').setView([38.4773559, -0.7947678], 16);
+        L.tileLayer('pnoa/{z}/{x}/{y}.png', {
+            minZoom: 16,
+            maxZoom: 19,
+            maxBounds: bbox,
+            attribution: '<a href="http://pnoa.ign.es/IGN-CNIG">PNOA@IGN</a>',
+            //tms: true
+        }).addTo(map);
+        map.setMaxBounds(bbox);
+        // marker
+	L.marker([38.4773559, -0.7947678]).addTo(map);
+    </script>
+</body>
+</html>
+
