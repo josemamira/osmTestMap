@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <title>Leaflet Windows</title>
+    
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />    
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+    <style type="text/css">
+        html, body { width: 100%; height: 100%; margin: 0; }
+        #map1, #map2 { width: 49.5%; height: 100%; }
+        #map1 { float: left; }
+        #map2 { float: right; }
+    </style>
+</head>
+
+<body>
+    <div id="map1"></div>
+    <div id="map2"></div>
+    <script src="L.Map.Sync.js"></script>    
+    
+    <script type="text/javascript">
+		
+	var center = [38.476523, -0.795769];
+
+
+	var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?', {
+		maxZoom: 25, 
+		attribution: 'Â© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'});
+		
+	var PNOA_ma = L.tileLayer.wms('http://www.ign.es/wms-inspire/pnoa-ma', {
+			layers: 'OI.OrthoimageCoverage',
+			format: 'image/png',
+			transparent: true,
+			continuousWorld : true,
+			attribution: 'PNOA cedido por © <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
+		});
+		
+	var murcia_1945 = L.tileLayer.wms("http://cartomur.imida.es/SgdWms/SgdWms_cartomur.dll/WMS?", {
+			layers: 'Ortofoto_1945',
+			format: 'image/png',
+			transparent: true,
+			maxZoom: 25,    
+			crs: L.CRS.EPSG4326,      			
+			attribution: "Ortofoto de 1945 de la Región de Murcia"
+		});
+			
+	var vuelo_46 = L.tileLayer.wms("http://fototeca.cnig.es/wms/fototeca.dll", {
+			layers: 'americano_serie_a',
+			format: 'image/png',
+			transparent: true,
+			attribution: "1945-1946 España Americano Serie A"
+		});
+
+    var vuelo_56 = 	L.tileLayer.wms('http://fototeca.cnig.es/wms/fototeca.dll', {
+			layers: 'americano_1956_57',
+			format: 'image/png',
+			transparent: true,
+			attribution: "1956-1957 España Americano Serie B"
+		});
+	
+	var pnoa_2005 = L.tileLayer.wms("http://www.ign.es/wms/pnoa-historico?", {
+			layers: 'PNOA2005',
+			format: 'image/png',
+			transparent: true,
+			maxZoom: 25,
+			attribution: "PNOA2005"
+		});
+			
+	var minutas = L.tileLayer.wms("http://www.ign.es/wms/minutas-cartograficas?", {
+			layers: 'Minutas',
+			format: 'image/png',
+			transparent: true,
+			maxZoom: 25,    
+			crs: L.CRS.EPSG4326,      			
+			attribution: "© Instituto Geográfico Nacional."
+		});
+			
+	var mtn50 = L.tileLayer.wms('http://www.ign.es/wms/primera-edicion-mtn', {
+			layers: 'MTN50',
+			format: 'image/png',
+			transparent: true,
+			continuousWorld : true,
+			attribution: "© Instituto Geográfico Nacional. Primeras ediciones del MTN"
+		});
+			
+	var catastro = L.tileLayer.wms("https://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx?", {
+		layers: 'Catastro',
+		format: 'image/png',
+		transparent: true,
+		attribution: '<a href="https://www.sedecatastro.gob.es/"" target="_blank">Dirección General de Catastro</a>'
+	}); 
+			
+	
+			
+		var map1 = L.map('map1', {
+				layers: [osm],
+				center: center,
+				zoom: 14
+			});
+
+		map1.attributionControl.setPrefix('');
+
+        var map2 = L.map('map2', {
+            layers: [PNOA_ma],
+            center: center,
+            zoom: 14,
+            zoomControl: false
+        });
+
+
+	var baseLayers = {
+		"OSM": osm,
+		"PNOA": PNOA_ma,
+		"2005": pnoa_2005,
+		"Murcia 1945": murcia_1945,
+		"Vuelo 46": vuelo_46,		
+		"1956": vuelo_56,
+		"Minutas": minutas,
+		"MTN50": mtn50,
+		"Catastro": catastro,
+	};
+	
+L.control.layers(baseLayers).addTo(map1);
+L.control.layers(baseLayers).addTo(map2);
+
+
+        map1.sync(map2);
+        map2.sync(map1);
+
+    </script>
+</body>
+</html>
