@@ -15,14 +15,28 @@
 	<script src="lib/leaflet/leaflet.js"></script>	
 	<script src="lib/cluster/leaflet.markercluster.js"></script>	
 	<script src="Leaflet.Photo.js"></script>
-	<script src="./tarraco.json"></script>
+	
 	<script>
 
 	var map = L.map('map', {
 		maxZoom: 19
 	});
+		
 	// GeoJSON
-	L.geoJSON(elementos).addTo(map);
+	var ruta new L.geoJson();
+	ruta.addTo(map);
+		
+	$.ajax({
+		dataType: "json",
+		url: "tarraco.geojson",
+		success: function(data) {
+			$(data.features).each(function(key, data) {
+				ruta.addData(data);
+			});
+		}
+	}).error(function() {});
+
+		
 		
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: 'OpenStreetMap' }).addTo(map);
 
