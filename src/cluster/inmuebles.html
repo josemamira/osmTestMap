@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>Ejemplo cluster - gestión inmobiliaria</title>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="screen.css" />
+
+	<link rel="stylesheet" href="dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="dist/MarkerCluster.Default.css" />
+	<script src="dist/leaflet.markercluster-src.js"></script>
+	
+	<script src="inmuebles.js"></script>
+
+</head>
+<body>
+
+	<div id="map"></div>
+	<span>Ejemplo de cluster (agrupamiento). Ampliar y hacer click en los puntos para ver más información</span>
+	<script type="text/javascript">
+
+		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 18,
+				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+			}),
+			latlng = L.latLng(38.364, -0.425);
+
+		var map = L.map('map', {center: latlng, zoom: 13, layers: [tiles]});
+
+		var markers = L.markerClusterGroup({ chunkedLoading: true });
+		
+		for (var i = 0; i < inmoPoints.length; i++) {
+			var a = inmoPoints[i];
+			var title = a[3];
+			var title = '<h5><a target="_blank" href="https://www.idealista.com/inmueble/'+a[2]+'/">'+	a[3]+'</a></h5>'+
+				'<hr>'+a[5] + '<br>Precio: <strong>'+ a[6]+
+				'</strong><br>Superficie: <strong>'+a[4]+'</strong>';
+			var marker = L.marker(L.latLng(a[0], a[1]), { title: title });
+			marker.bindPopup(title);
+			markers.addLayer(marker);
+		}
+
+		map.addLayer(markers);
+
+	</script>
+</body>
+</html>
