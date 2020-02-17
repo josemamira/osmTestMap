@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EJEMPLO PAM A PAM </title>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="screen.css" />
+
+	<link rel="stylesheet" href="dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="dist/MarkerCluster.Default.css" />
+	<script src="dist/leaflet.markercluster-src.js"></script>
+	
+	
+
+</head>
+<body>
+
+
+    <div id="map"></div>
+
+    <script type="text/javascript">
+    
+    var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }),
+		latlng = L.latLng(38.974,-0.481);// centro del mapa
+		var map = L.map('map', {center: latlng, zoom: 8, layers: [CartoDB_Positron]});
+	
+		var markers = L.markerClusterGroup({ chunkedLoading: true });
+
+ 		// Obtener el JSON
+		var requestURL = 'pam.json';
+		// ORIGINAL -> https://pamapampv.org/directori-de-punts/?json
+		var request = new XMLHttpRequest();
+		request.open('GET', requestURL);
+		request.responseType = 'json';
+		request.send();
+		
+		// Obtener puntos y adjuntar popup
+		request.onload = function() {
+			var comercios = request.response;
+			var lang='es/';
+			
+			for (var i = 0; i < comercios.length; i++) {
+				var comercio = comercios[i];
+				//var title = comercio['post_title'];
+				var title = '<h5>'+comercio['post_title']+'</h5>'+
+					'<hr>'+comercio['post_content'] + 
+					'<br>Horario: <strong>'+ comercio['wpcf-horario'] + '</strong>'+
+					'<br>Enlace: <strong><a arget="_blank" href="'+comercio['link']+'">'+comercio['link']+'</a></strong>';
+				var marker = L.marker(L.latLng(comercio['latitud'], comercio['longitud']), { title: title });
+				marker.bindPopup(title);
+				markers.addLayer(marker);
+			}	
+
+		 };
+		 map.addLayer(markers); 
+		 
+		 
+		 // Evento
+		 var popup = L.popup();
+
+		function onMapClick(e) {
+			var msg = '<h5>Nuevo comercio en '+ e.latlng.lng.toString() +','+ e.latlng.lat.toString() +'</h5><hr>'+			   
+				'<form id="popup-form">  <label for="nombre">Nuevo comercio:</label>  <input id="nombre" type="text" value="introduce el nombre"><br>' + 
+				'<label for="horario">Horario:</label>  <input id="horario" type="text" value="introduce el horario"><br>'+
+				'<label for="contacto">Contacto:</label>  <input id="contacto" type="text" value="persona de contacto"><br>'+
+				'<button id="button-submit" type="button">Guardar cambios</button></form>';
+			popup
+				.setLatLng(e.latlng)
+				//.setContent("You clicked the map at " + e.latlng.toString())
+				.setContent(msg)
+				.openOn(map);
+		}
+
+		map.on('click', onMapClick);
+		 
+
+
+	</script>
+</body>
