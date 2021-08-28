@@ -1,1 +1,73 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Javi Cantos mapa</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+
+	
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+	var map = L.map('map').setView([38.484608,-0.790418], 13);
+
+	// Analizar la URL
+	//comprueba si hay una url con el codigo del tipo http://localhost/bootleaf2/websigua2/index.html?id=0037P1013
+	var laURL = window.location.href;
+	const arrTxtCoords = laURL.split("?")[1];
+	const arrCoords = arrTxtCoords.split("&");
+	//console.log(arrCoords);
+	
+	var markerArray = [];
+			
+	for (i = 0; i < arrCoords.length; i++) {
+		console.log(arrCoords[i]);
+		lat = arrCoords[i].split(",")[1]
+		lon = arrCoords[i].split(",")[2]
+		txt = decodeURI(arrCoords[i].split(",")[0])    //.replace(/%20/g, " ")
+			
+		
+		var marker = L.marker([lat, lon]).bindTooltip(txt, {permanent: true, direction: 'right'});
+		markerArray.push(marker);
+		//marker.addTo(map);		
+		
+	}
+	console.log(markerArray)
+	var group = L.featureGroup(markerArray).addTo(map);
+	map.fitBounds(group.getBounds());
+
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+
+</script>
+
+
+
+</body>
+</html>
+
