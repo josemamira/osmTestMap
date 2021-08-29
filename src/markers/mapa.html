@@ -56,7 +56,12 @@
 			lon = arrCoords[i].split(",")[2]
 			txt = decodeURI(arrCoords[i].split(",")[0])    //.replace(/%20/g, " ")	
 			
-			var marker = L.marker([lat, lon]).bindTooltip(txt, {permanent: true, direction: 'right'});
+			//var marker = L.marker([lat, lon]).bindTooltip(txt, {permanent: true, direction: 'right'});
+			if (i == 0)  {
+				var marker = L.marker([lat, lon]).bindTooltip("<div style='background:orange; padding:1px 3px 1px 3px'><b>" + txt + "</b></div>", {permanent: true, direction: "right"});
+			} else {
+				var marker = L.marker([lat, lon]).bindTooltip(txt, {permanent: true, direction: "right"});
+			}
 			markerArray.push(marker);			
 		}
 		//console.log(markerArray)
