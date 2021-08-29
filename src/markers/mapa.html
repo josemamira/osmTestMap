@@ -34,6 +34,17 @@
 
 <script>
 	var map = L.map('map').setView([38.34360,-0.49811], 13);
+	
+	// Icono
+		var redIcon = L.icon({
+		iconUrl: 'marker-icon-red.png',
+		shadowUrl: 'marker-icon-shadow.png',
+		iconSize:     [25, 41],
+		shadowSize:   [41, 41],
+		iconAnchor:   [12, 41],
+		shadowAnchor: [4, 41],
+		popupAnchor:  [0, -41]
+	});
 
 	// Analizar la URL
 	var laURL = window.location.href;
@@ -58,7 +69,7 @@
 			
 			//var marker = L.marker([lat, lon]).bindTooltip(txt, {permanent: true, direction: 'right'});
 			if (i == 0)  {
-				var marker = L.marker([lat, lon]).bindTooltip("<div style='background:orange; padding:1px 3px 1px 3px'><b>" + txt + "</b></div>", {permanent: true, direction: "right"});
+				var marker = L.marker([lat, lon],{icon: redIcon}).bindTooltip("<div style='background:orange; padding:1px 3px 1px 3px'><b>" + txt + "</b></div>", {permanent: true, direction: "right"});
 			} else {
 				var marker = L.marker([lat, lon]).bindTooltip(txt, {permanent: true, direction: "right"});
 			}
