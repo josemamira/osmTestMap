@@ -73,7 +73,12 @@
         var map = L.map('map').setView([30, 0], 3);
         /*var negro   = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiajNtIiwiYSI6ImNpb3R4Z3FkMzAwMzB2dGtqYmlxcTlhNjYifQ.NjYz5j05SJiXXQ0Ul6_IGQ', {attribution: 'MapBox'}),
 		osm  = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'OSM'});*/
-	var light = L.tileLayer('');
+	var light = L.tileLayer('http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.pn',{
+	   attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	   subdomains: 'abcd',
+	   maxZoom: 20,
+	   minZoom: 0
+	 });   
 	light.addTo(map);    
         //negro.addTo(map);
 	    
