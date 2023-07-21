@@ -5,7 +5,7 @@ osmTestMap
 =============
 
 Created by José Manuel Mira at [osmTestMap] (https://josemamira.github.io/osmTestMap/)
-Full demo at [Saxweb] (https://josemamira.github.io/osmTestMap/)
+Full demo at [osmTestMap] (https://josemamira.github.io/osmTestMap/)
 
 
 
