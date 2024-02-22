@@ -36,7 +36,7 @@
 
 	const map = L.map('map').setView([38.3845536170725,  -0.513162189738523], 13);
 
-	const tiles = L.tileLayer('http://terramapas.icv.gva.es/0202_2023CVAL0025_3857/wmts/{z}/{x}/{y}.png', {
+	const tiles = L.tileLayer('https://terramapas.icv.gva.es/mapabase_ortofoto/wmts/1.0.0/01_8bits_01_RGB_05_PNG/default/GMEPSG3857/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="https://catalogo.icv.gva.es/geonetwork/srv/spa/catalog.search#/metadata/spaicv0202_2023CVAL0025">Institut Cartografic Valencià</a>'
 	}).addTo(map);
